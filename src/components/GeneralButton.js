@@ -3,7 +3,7 @@ import styled from "styled-components"
 export default function GeneralButton({text}){
     return(
         <Container>
-            <button onClick={() => console.log("Clico")}>{text}</button>
+            <button>{text}</button>
         </Container>
     )
 }
@@ -12,7 +12,6 @@ const Container = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-
 
     button{
         width: 85%;

@@ -1,19 +1,19 @@
-
-import { Link } from "react-router-dom"
 import styled from "styled-components"
 import GeneralButton from "./components/GeneralButton"
+import {Link }from "react-router-dom"
 import GeneralInput from "./components/GeneralInput"
 
-export default function SignIn() {
+export default function SignUp() {
     return (
         <Container>
             <h1>MyWallet</h1>
-            <GeneralInput text="Email" />
+            <GeneralInput text="Nome" />
+            <GeneralInput text="E-mail" />
             <GeneralInput text="Senha" />
-            <GeneralButton text="Entrar" />
-
-            <Link to="/cadastrar">
-                <p>Primeira vez? Cadastre-se</p>
+            <GeneralInput text="Confirme a senha" />
+            <GeneralButton text="Cadastar" />
+            <Link to="/">
+                <p>Ja tem uma conta? Entre agora</p>
             </Link>
 
         </Container>
