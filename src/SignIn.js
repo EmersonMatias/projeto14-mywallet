@@ -41,7 +41,6 @@ const Container = styled.div`
         font-weight: 700;
         line-height: 18px;
         color: #FFFFFF;
-        margin-top: 48px;
         cursor: pointer;
     }
 `

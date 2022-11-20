@@ -12,6 +12,7 @@ export default function SignUp() {
             <GeneralInput text="Senha" />
             <GeneralInput text="Confirme a senha" />
             <GeneralButton text="Cadastar" />
+            
             <Link to="/">
                 <p>Ja tem uma conta? Entre agora</p>
             </Link>
@@ -41,7 +42,6 @@ const Container = styled.div`
         font-weight: 700;
         line-height: 18px;
         color: #FFFFFF;
-        margin-top: 48px;
         cursor: pointer;
     }
 `
