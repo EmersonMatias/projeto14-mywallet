@@ -1,20 +1,69 @@
 
-import { Link } from "react-router-dom"
+import axios from "axios"
+import { useContext, useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import GeneralButton from "./components/GeneralButton"
 import GeneralInput from "./components/GeneralInput"
+import MyContext from "./context/MyContext"
 
 export default function SignIn() {
+    const [dataLogin, setDataLogin] = useState({ email: "", senha: "" })
+    const {dataUser, setDataUser} = useContext(MyContext)
+    const navigate = useNavigate()
+
+    console.log(dataLogin)
+    console.log(dataUser)
+
+    function signInUser(e){
+        e.preventDefault()
+        let checkPassword = dataLogin.senha?.length
+        let checkEmail = dataLogin.email?.length
+
+        if(checkPassword < 8){
+            return alert("Por favor, digite a senha uma senha valida")
+        }
+        if(checkEmail === 0){
+            return alert("Por favor, digite o email")
+        }
+
+        //FUNÇÃO ERRO LOGIN
+        function errorSignIn(error){
+           alert(error.response.data)
+        }
+
+        // FUNÇÃO SUCESSO LOGIN
+        function sucessSignIn(res){
+            console.log(res)
+            setDataUser({nome: res.data.nome, token: res.data.token})
+            navigate("/inicio")
+            setDataLogin({ email: "", senha: "" })
+        }
+
+        // REQUISIÇÃO LOGIN
+        axios.post("http://localhost:5000/signin", dataLogin)
+                .then((res) =>  sucessSignIn(res))
+                .catch((error) =>  errorSignIn(error))
+    }
+
+   
+
+
     return (
         <Container>
             <h1>MyWallet</h1>
-            <GeneralInput text="Email" />
-            <GeneralInput text="Senha" />
-            <GeneralButton text="Entrar" />
 
-            <Link to="/cadastrar">
+            <form onSubmit={(e)=> signInUser(e)}>
+                <GeneralInput text="Email" type={"email"} onchange={(e) => (setDataLogin({...dataLogin, email: e.target.value}))} value={dataLogin.email}/>
+                <GeneralInput text="Senha" type={"password"} onchange={(e) => (setDataLogin({...dataLogin, senha: e.target.value}))} value={dataLogin.senha}/>
+                <GeneralButton text="Entrar" />
+
+            </form>
+
+
+            <StyledLink to="/cadastrar">
                 <p>Primeira vez? Cadastre-se</p>
-            </Link>
+            </StyledLink>
 
         </Container>
     )
@@ -43,4 +92,12 @@ const Container = styled.div`
         color: #FFFFFF;
         cursor: pointer;
     }
+
+    form{
+        width: 100%;
+    }
+`
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
 `

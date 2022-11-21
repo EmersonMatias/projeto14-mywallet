@@ -1,9 +1,9 @@
 import styled from "styled-components"
 
-export default function GeneralInput({text}){
+export default function GeneralInput({text, type, onchange, value}){
     return(
         <Container>
-            <input placeholder={text}></input>
+            <input placeholder={text} type={type} onChange={onchange} value={value}></input>
         </Container>
     )
 }
