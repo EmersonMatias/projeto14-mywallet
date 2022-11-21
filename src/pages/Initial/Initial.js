@@ -19,7 +19,7 @@ export default function Initial() {
     }, [dataUser])
 
     useEffect(() => {
-        axios.get("http://localhost:5000/datausers", config)
+        axios.get("https://mywallet-api-r7d5.onrender.com/datausers", config)
             .then((res) => { setListDataUser(res.data) })
             .catch((error) => (console.log(error)))
     },)

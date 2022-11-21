@@ -45,10 +45,9 @@ export default function SignUp() {
             setDataSignUp({ nome: "", email: "", senha: "", confsenha: "" })
         }
 
-
-        axios.post("http://localhost:5000/signup", newDataSignUp)
-                .then((res) => sucessSignUp(res))
-                .catch((error) => errorSignUp(error))
+        axios.post("https://mywallet-api-r7d5.onrender.com/signup", newDataSignUp)
+            .then((res) => sucessSignUp(res))
+            .catch((error) => errorSignUp(error))
     }
 
     return (

@@ -46,9 +46,9 @@ export default function OutputValue() {
             setOutputDataValue({description: "", value: ""})
         }
 
-        axios.post("http://localhost:5000/datausers", dataOutput, config)
-                .then((res) => {sucessRegister(res)})
-                . catch((error) => {console.log(error)})
+        axios.post("https://mywallet-api-r7d5.onrender.com/datausers", dataOutput, config)
+            .then((res) => {sucessRegister(res)})
+            . catch((error) => {console.log(error)})
     }
 
     return (
