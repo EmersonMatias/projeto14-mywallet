@@ -3,17 +3,14 @@ import dayjs from "dayjs"
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import GeneralButton from "./components/GeneralButton"
-import GeneralInput from "./components/GeneralInput"
-import MyContext from "./context/MyContext"
-
-
+import GeneralButton from "../components/GeneralButton"
+import GeneralInput from "../components/GeneralInput"
+import MyContext from "../context/MyContext"
 
 export default function OutputValue() {
     const [outputValueData, setOutputDataValue] = useState({ description: "", value: "" })
     const {config, dataUser} = useContext(MyContext)
     const navigate = useNavigate()
-    console.log(outputValueData)
 
     useEffect(() => {
         if (!dataUser) {
@@ -22,7 +19,7 @@ export default function OutputValue() {
 
     }, [])
 
-    function dataRegister(e){
+    function dataRegisterOutput(e){
         e.preventDefault()
         
         let checkDescription = outputValueData.description.length
@@ -32,7 +29,7 @@ export default function OutputValue() {
            return  alert("Por favor, coloque uma descrição")
         }
 
-        if(!checkValue  || checkValue < 0){
+        if(!checkValue  || checkValue <= 0){
             return  alert("Por favor, coloque um valor válido")
         }
 
@@ -52,14 +49,13 @@ export default function OutputValue() {
         axios.post("http://localhost:5000/datausers", dataOutput, config)
                 .then((res) => {sucessRegister(res)})
                 . catch((error) => {console.log(error)})
-
     }
 
     return (
         <Container>
             <header>Nova saida</header>
 
-            <form onSubmit={(e) => dataRegister(e)}>
+            <form onSubmit={(e) => dataRegisterOutput(e)}>
                 <GeneralInput text={"Valor"} type={"number"} onchange={(e) => { setOutputDataValue({ ...outputValueData, value: e.target.value }) }} value={outputValueData.value}/>
                 <GeneralInput text={"Descrição"} type={"text"} onchange={(e) => { setOutputDataValue({ ...outputValueData, description: e.target.value }) }} value={outputValueData.description}/>
                 <GeneralButton text={"Salvar entrada"} />
@@ -84,7 +80,6 @@ const Container = styled.div`
         font-weight: 700;
         color: #FFFFFF;
         margin-bottom: 30px;
-
     }
 
     form{

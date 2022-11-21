@@ -1,19 +1,16 @@
 
 import axios from "axios"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import GeneralButton from "./components/GeneralButton"
-import GeneralInput from "./components/GeneralInput"
-import MyContext from "./context/MyContext"
+import GeneralButton from "../components/GeneralButton"
+import GeneralInput from "../components/GeneralInput"
+import MyContext from "../context/MyContext"
 
 export default function SignIn() {
     const [dataLogin, setDataLogin] = useState({ email: "", senha: "" })
-    const {dataUser, setDataUser} = useContext(MyContext)
+    const {setDataUser} = useContext(MyContext)
     const navigate = useNavigate()
-
-    console.log(dataLogin)
-    console.log(dataUser)
 
     function signInUser(e){
         e.preventDefault()
@@ -29,12 +26,11 @@ export default function SignIn() {
 
         //FUNÇÃO ERRO LOGIN
         function errorSignIn(error){
-           alert(error.response.data)
+           alert(error.response?.data)
         }
 
         // FUNÇÃO SUCESSO LOGIN
         function sucessSignIn(res){
-            console.log(res)
             setDataUser({nome: res.data.nome, token: res.data.token})
             navigate("/inicio")
             setDataLogin({ email: "", senha: "" })
@@ -46,9 +42,6 @@ export default function SignIn() {
                 .catch((error) =>  errorSignIn(error))
     }
 
-   
-
-
     return (
         <Container>
             <h1>MyWallet</h1>
@@ -59,7 +52,6 @@ export default function SignIn() {
                 <GeneralButton text="Entrar" />
 
             </form>
-
 
             <StyledLink to="/cadastrar">
                 <p>Primeira vez? Cadastre-se</p>

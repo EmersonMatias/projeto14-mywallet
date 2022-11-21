@@ -1,14 +1,12 @@
 import styled from "styled-components"
-import GeneralButton from "./components/GeneralButton"
+import GeneralButton from "../components/GeneralButton"
 import { Link } from "react-router-dom"
-import GeneralInput from "./components/GeneralInput"
+import GeneralInput from "../components/GeneralInput"
 import { useState } from "react"
 import axios from "axios"
 
-
 export default function SignUp() {
     const [dataSignUp, setDataSignUp] = useState({ nome: "", email: "", senha: "", confsenha: "" })
-    console.log(dataSignUp)
 
     function signUpUser(e) {
         e.preventDefault()
@@ -51,11 +49,6 @@ export default function SignUp() {
         axios.post("http://localhost:5000/signup", newDataSignUp)
                 .then((res) => sucessSignUp(res))
                 .catch((error) => errorSignUp(error))
-       
-
-
-
-
     }
 
     return (
@@ -74,7 +67,6 @@ export default function SignUp() {
             <StyledLink to="/">
                 <p>Ja tem uma conta? Entre agora</p>
             </StyledLink>
-
         </Container>
     )
 }
@@ -108,7 +100,6 @@ const Container = styled.div`
         
     }
 `
-
 
 const StyledLink = styled(Link)`
     text-decoration: none;

@@ -1,20 +1,17 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { BrowserRouter, redirect, Route, Routes } from "react-router-dom";
+import {  useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import GlobalStyle from "./components/GlobalStyle";
 import MyContext from "./context/MyContext";
-import Initial from "./Initial";
-import InputValue from "./InputValue";
-import OutputValue from "./OutputValue";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp"
+import Initial from "./pages/Initial/Initial";
+import InputValue from "./pages/InputValue";
+import OutputValue from "./pages/OutputValue";
+import SignIn from "./pages/SignIn.js"
+import SignUp from "./pages/SignUp.js"
 
 
 export default function App() {
   const [dataUser, setDataUser] = useState()
   const config = { headers: { Authorization: `Bearer ${dataUser?.token}` } }
-
-
 
   return (
     <BrowserRouter>
@@ -22,6 +19,7 @@ export default function App() {
 
 
       <MyContext.Provider value={{ dataUser, setDataUser, config }}>
+
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/cadastrar" element={<SignUp />} />
@@ -31,8 +29,6 @@ export default function App() {
         </Routes>
 
       </MyContext.Provider>
-
-
     </BrowserRouter>
   );
 }
